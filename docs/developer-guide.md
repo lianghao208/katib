@@ -16,7 +16,7 @@ see the following user guides:
 - [Docker](https://docs.docker.com/) (20.10 or later)
 - [Docker Buildx](https://docs.docker.com/build/buildx/) (0.8.0 or later)
 - [Java](https://docs.oracle.com/javase/8/docs/technotes/guides/install/install_overview.html) (8 or later)
-- [Python](https://www.python.org/) (3.10 or later)
+- [Python](https://www.python.org/) (3.11 or later)
 - [kustomize](https://kustomize.io/) (4.0.5 or later)
 
 ## Build from source code
@@ -42,6 +42,25 @@ You can undeploy Katib v1beta1 manifests from a Kubernetes cluster as follows:
 ```bash
 make undeploy
 ```
+
+## Technical and style guide
+
+The following guidelines apply primarily to Katib, 
+but other projects like [Training Operator](https://github.com/kubeflow/training-operator) might also adhere to them. 
+
+## Go Development
+
+When coding:
+
+- Follow [effective go](https://go.dev/doc/effective_go) guidelines.
+- Run locally [`make check`](https://github.com/kubeflow/katib/blob/46173463027e4fd2e604e25d7075b2b31a702049/Makefile#L31)
+to verify if changes follow best practices before submitting PRs.
+
+Testing:
+
+- Use [`cmp.Diff`](https://pkg.go.dev/github.com/google/go-cmp/cmp#Diff) instead of `reflect.Equal`, to provide useful comparisons.
+- Define test cases as maps instead of slices to avoid dependencies on the running order.
+Map key should be equal to the test case name.
 
 ## Modify controller APIs
 
